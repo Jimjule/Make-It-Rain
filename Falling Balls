@@ -1,0 +1,33 @@
+var xPositions = [150];
+var yPositions = [0];
+var dropColor = [255, 88, 60];
+var dropRadius = [random(5,20)];
+
+//Draws a raindrop against a background, and moves it down the page.
+draw = function() {
+    background(204, 247, 255);
+
+    for (var i = 0; i < xPositions.length;     i++) {
+        noStroke();
+        fill(dropColor[i]);
+        if(xPositions[i]<200){
+            ellipse(xPositions[i],                    yPositions[i], dropRadius[i],             dropRadius[i]);
+        }
+        else{
+        image(getImage("avatars/avatar-team"),xPositions[i],yPositions[i], 10, 10);
+        }
+        yPositions[i] += 5;
+        if(yPositions[i]===400){
+        yPositions[i]=0;
+        }
+    }
+};
+
+//Triggers a raindrop from the top, according to X position of the mouse. Also pushes a new random color and radius for each drop.
+mouseClicked = function(){
+    xPositions.push(mouseX);
+    yPositions.push(0);
+    dropColor.push(random(70,270), random(0,255), random(100,250));
+    dropRadius.push(random(5,20));
+    draw();
+};
